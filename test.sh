@@ -54,6 +54,16 @@ else
     echo "FAIL"
 fi
 
+# testing rows, where they are different length 
+echo -n "Below range file - "
+./maze differentLength.txt > tmp
+if grep -q "File must have rows of the same length";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
 # testing correct file
 echo -n "Correct file range - "
 ./maze correctFile.txt > tmp
@@ -65,10 +75,10 @@ else
 fi
 
 # testing movement - W/A/S/D should move the character the correct way
-echo -e "\n\n~~ Movement Tests"
+echo -e "\n\n~~ Movement Tests ~~"
 
 # should return an error if the player moves into a wall
-./maze wallTest.txt < inputs/moveWall > tmp
+./maze wallTest.txt < inputs/moveForward > tmp
 if grep -q "Can't move into wall";
 then 
     echo "PASS"
@@ -76,7 +86,20 @@ else
     echo "FAIL"
 fi
 
-# testing map - if player presses m, should return the map
+# check if player hits the exit
+./maze exitTest.txt < inputs/moveForward > tmp
+if grep -q "Found exit";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
 
-# testing end 
-
+# testing map - if player presses m, should return the map matching original file
+./maze correctFile.txt < inputs/openMap > tmp
+if grep -q correctFile.txt;
+then
+    echo "PASS"
+else    
+    echo "FAIL"
+fi
