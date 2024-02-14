@@ -23,8 +23,8 @@ fi
 
 # should print maze after correct argument amount entered
 echo -n "Correct file test - "
-./maze correctFile.txt > tmp
-if grep -q correctFile.txt;
+./maze testFiles/correctFile.txt > tmp
+if grep -q testFiles/correctFile.txt;
 then 
     echo "PASS"
 else
@@ -36,7 +36,7 @@ echo -e "\n\n~~ File Validity ~~"
 
 # a too long file - should tell user file is too long
 echo -n "Out of range file - "
-./maze outOfRange.txt > tmp
+./maze testFiles/outOfRange.txt > tmp
 if grep -q "File must be under 100 rows";
 then 
     echo "PASS"
@@ -46,7 +46,7 @@ fi
 
 # a too short file - should tell user file too short
 echo -n "Below range file - "
-./maze belowRange.txt > tmp
+./maze testFiles/belowRange.txt > tmp
 if grep -q "File must be over 5 rows";
 then 
     echo "PASS"
@@ -56,7 +56,7 @@ fi
 
 # testing rows, where they are different length 
 echo -n "Below range file - "
-./maze differentLength.txt > tmp
+./maze testMaps/differentLength.txt > tmp
 if grep -q "File must have rows of the same length";
 then 
     echo "PASS"
@@ -66,7 +66,7 @@ fi
 
 # testing correct file
 echo -n "Correct file range - "
-./maze correctFile.txt > tmp
+./maze testFiles/correctFile.txt > tmp
 if grep -q "Correct length file";
 then 
     echo "PASS"
@@ -78,7 +78,7 @@ fi
 echo -e "\n\n~~ Movement Tests ~~"
 
 # should return an error if the player moves into a wall
-./maze wallTest.txt < inputs/moveForward > tmp
+./maze testMaps/wallTest.txt < inputs/moveForward > tmp
 if grep -q "Can't move into wall";
 then 
     echo "PASS"
@@ -87,7 +87,7 @@ else
 fi
 
 # check if player hits the exit
-./maze exitTest.txt < inputs/moveForward > tmp
+./maze testMaps/exitTest.txt < inputs/moveForward > tmp
 if grep -q "Found exit";
 then 
     echo "PASS"
@@ -96,8 +96,8 @@ else
 fi
 
 # testing map - if player presses m, should return the map matching original file
-./maze correctFile.txt < inputs/openMap > tmp
-if grep -q correctFile.txt;
+./maze testFiles/correctFile.txt < inputs/openMap > tmp
+if grep -q testFiles/correctFile.txt;
 then
     echo "PASS"
 else    
