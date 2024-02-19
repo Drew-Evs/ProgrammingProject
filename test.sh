@@ -34,6 +34,25 @@ fi
 # testing file valid - be within 5-100 and each column and row are the same length
 echo -e "\n\n~~ File Validity ~~"
 
+# testing a file that is entered exists
+echo -n "Non existent file test - "
+./maze nonExistent.txt > tmp
+if grep -q "File doesn't exist";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
+echo -n "Non text file test - "
+./maze testFiles/incorrectType.csv > tmp
+if grep -q "File is not a .txt file";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
 # a too long file - should tell user file is too long
 echo -n "Out of range file - "
 ./maze testFiles/outOfRange.txt > tmp
@@ -74,11 +93,62 @@ else
     echo "FAIL"
 fi
 
+# testing to see if a file is valid by having an S and E
+echo -n "Start and end test - "
+./maze testMaps/emptyMaze.txt > tmp
+if grep -q "No start or no end";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
 # testing movement - W/A/S/D should move the character the correct way
-echo -e "\n\n~~ Movement Tests ~~"
+# each test should take one move in the right direction to exit the maze
+echo - e "\n\n~~ Movement Tests ~~"
+
+echo -n "Moving right test - "
+./maze testMaps/rightTest.txt < inputs/moveRight.txt > tmp
+if grep -q "Found exit";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
+echo -n "Moving right test - "
+./maze testMaps/upTest.txt < inputs/moveForward.txt > tmp
+if grep -q "Found exit";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
+echo -n "Moving left test - "
+./maze testMaps/leftTest.txt < inputs/moveLeft.txt > tmp
+if grep -q "Found exit";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
+echo -n "Moving down test - "
+./maze testMaps/downTest.txt < inputs/moveDown.txt > tmp
+if grep -q "Found exit";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
+# testing validity of moves 
+echo -e "\n\n~~ Movement Validity Tests ~~"
 
 # should return an error if the player moves into a wall
-./maze testMaps/wallTest.txt < inputs/moveForward > tmp
+echo -n "Moving into wall test - "
+./maze testMaps/wallTest.txt < inputs/moveForward.txt > tmp
 if grep -q "Can't move into wall";
 then 
     echo "PASS"
@@ -86,8 +156,19 @@ else
     echo "FAIL"
 fi
 
+# should return valid if the player moves into a space
+echo -n "Valid move test - "
+./maze testFiles/correctFile.txt < inputs/moveRight.txt > tmp
+if grep -q "Valid move";
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
 # check if player hits the exit
-./maze testMaps/exitTest.txt < inputs/moveForward > tmp
+echo -n "Exit test - "
+./maze testMaps/exitTest.txt < inputs/moveForward.txt > tmp
 if grep -q "Found exit";
 then 
     echo "PASS"
@@ -96,7 +177,8 @@ else
 fi
 
 # testing map - if player presses m, should return the map matching original file
-./maze testFiles/correctFile.txt < inputs/openMap > tmp
+echo -n "Map test - "
+./maze testFiles/correctFile.txt < inputs/openMap.txt > tmp
 if grep -q testFiles/correctFile.txt;
 then
     echo "PASS"

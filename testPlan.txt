@@ -1,0 +1,23 @@
+Basic function of game:
+- Load a text file of the maze 
+- Convert maze to a struct 
+- Find start position
+- Allow user to move through maze
+- Validate each move - (e.g make sure not moving into wall)
+- Allow user to open a map
+- Validate ending
+
+Functional Requirements:
+Files:
+- Must be in range (5-100 rows and cols)
+- Must exist (correct name)
+- Must be text
+Maps:
+- Must have a start and finish
+- Must be a rectangle
+Movement:
+- Must not be into a wall
+- Must be valid if moving into a space
+- Must move in the correct direction
+- Must check to see if exit found 
+
