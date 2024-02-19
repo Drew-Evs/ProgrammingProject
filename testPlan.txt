@@ -8,6 +8,9 @@ Basic function of game:
 - Validate ending
 
 Functional Requirements:
+Arguments:
+- Must have 2 arguments 
+- Arguments must be: <executable> <filename>
 Files:
 - Must be in range (5-100 rows and cols)
 - Must exist (correct name)
