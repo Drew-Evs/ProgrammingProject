@@ -97,7 +97,7 @@ int end_test(int POSITION, int MAZE){
     
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     //initates structs for current position and maze
 
     //calls functions to check validity of file & convert to struct

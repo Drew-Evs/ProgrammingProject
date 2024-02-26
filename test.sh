@@ -21,10 +21,10 @@ else
     echo "FAIL"
 fi
 
-# should print maze after correct argument amount entered
+# should print a correct arg num message after correct argument amount entered
 echo -n "Correct file test - "
-./maze testFiles/correctFile.txt > tmp
-if grep -q testFiles/correctFile.txt;
+./maze correctFile.txt > tmp
+if grep -q "Correct argument number" tmp;
 then 
     echo "PASS"
 else
@@ -37,16 +37,16 @@ echo -e "\n\n~~ File Validity ~~"
 # testing a file that is entered exists
 echo -n "Non existent file test - "
 ./maze nonExistent.txt > tmp
-if grep -q "File doesn't exist";
+if grep -q "File doesn't exist" tmp;
 then 
-    echo "PASS"
+    echo "PASS" 
 else
     echo "FAIL"
 fi
 
 echo -n "Non text file test - "
 ./maze testFiles/incorrectType.csv > tmp
-if grep -q "File is not a .txt file";
+if grep -q "File is not a .txt file" tmp;
 then 
     echo "PASS"
 else
@@ -56,7 +56,7 @@ fi
 # a too long file - should tell user file is too long
 echo -n "Out of range file - "
 ./maze testFiles/outOfRange.txt > tmp
-if grep -q "File must be under 100 rows";
+if grep -q "File must be under 100 rows" tmp;
 then 
     echo "PASS"
 else
@@ -66,7 +66,7 @@ fi
 # a too short file - should tell user file too short
 echo -n "Below range file - "
 ./maze testFiles/belowRange.txt > tmp
-if grep -q "File must be over 5 rows";
+if grep -q "File must be over 5 rows" tmp;
 then 
     echo "PASS"
 else
@@ -76,7 +76,7 @@ fi
 # testing rows, where they are different length 
 echo -n "Below range file - "
 ./maze testMaps/differentLength.txt > tmp
-if grep -q "File must have rows of the same length";
+if grep -q "File must have rows of the same length" tmp;
 then 
     echo "PASS"
 else
@@ -86,7 +86,7 @@ fi
 # testing correct file
 echo -n "Correct file range - "
 ./maze testFiles/correctFile.txt > tmp
-if grep -q "Correct length file";
+if grep -q "Correct length file" tmp;
 then 
     echo "PASS"
 else
@@ -96,7 +96,7 @@ fi
 # testing to see if a file is valid by having an S and E
 echo -n "Start and end test - "
 ./maze testMaps/emptyMaze.txt > tmp
-if grep -q "No start or no end";
+if grep -q "No start or no end" tmp;
 then 
     echo "PASS"
 else
@@ -105,11 +105,11 @@ fi
 
 # testing movement - W/A/S/D should move the character the correct way
 # each test should take one move in the right direction to exit the maze
-echo - e "\n\n~~ Movement Tests ~~"
+echo -e "\n\n~~ Movement Tests ~~"
 
 echo -n "Moving right test - "
 ./maze testMaps/rightTest.txt < inputs/moveRight.txt > tmp
-if grep -q "Found exit";
+if grep -q "Found exit" tmp;
 then 
     echo "PASS"
 else
@@ -118,7 +118,7 @@ fi
 
 echo -n "Moving right test - "
 ./maze testMaps/upTest.txt < inputs/moveForward.txt > tmp
-if grep -q "Found exit";
+if grep -q "Found exit" tmp;
 then 
     echo "PASS"
 else
@@ -127,7 +127,7 @@ fi
 
 echo -n "Moving left test - "
 ./maze testMaps/leftTest.txt < inputs/moveLeft.txt > tmp
-if grep -q "Found exit";
+if grep -q "Found exit" tmp;
 then 
     echo "PASS"
 else
@@ -136,7 +136,7 @@ fi
 
 echo -n "Moving down test - "
 ./maze testMaps/downTest.txt < inputs/moveDown.txt > tmp
-if grep -q "Found exit";
+if grep -q "Found exit" tmp; 
 then 
     echo "PASS"
 else
@@ -149,7 +149,7 @@ echo -e "\n\n~~ Movement Validity Tests ~~"
 # should return an error if the player moves into a wall
 echo -n "Moving into wall test - "
 ./maze testMaps/wallTest.txt < inputs/moveForward.txt > tmp
-if grep -q "Can't move into wall";
+if grep -q "Can't move into wall" tmp;
 then 
     echo "PASS"
 else
@@ -159,7 +159,7 @@ fi
 # should return valid if the player moves into a space
 echo -n "Valid move test - "
 ./maze testFiles/correctFile.txt < inputs/moveRight.txt > tmp
-if grep -q "Valid move";
+if grep -q "Valid move" tmp;
 then 
     echo "PASS"
 else
@@ -169,7 +169,7 @@ fi
 # check if player hits the exit
 echo -n "Exit test - "
 ./maze testMaps/exitTest.txt < inputs/moveForward.txt > tmp
-if grep -q "Found exit";
+if grep -q "Found exit" tmp;
 then 
     echo "PASS"
 else
@@ -179,9 +179,11 @@ fi
 # testing map - if player presses m, should return the map matching original file
 echo -n "Map test - "
 ./maze testFiles/correctFile.txt < inputs/openMap.txt > tmp
-if grep -q testFiles/correctFile.txt;
+if grep -q testFiles/correctFile.txt tmp;
 then
     echo "PASS"
 else    
     echo "FAIL"
 fi
+
+rm -f tmp
