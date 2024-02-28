@@ -15,18 +15,20 @@ struct MAZE {
 @brief:
 Struct to hold the current position of the user in the mao
 @vars:
-x (char) - x position on map
-y (char) - y position on map
+x (int) - x position on map
+y (int) - y position on map
 */
 struct POS {
-    char x;
-    char y;
+    int x;
+    int y;
 } POS;
 
 /* 
 @brief
 Function to ensure a text file is valid
 To be valid, lengths of columns and rows must be between 5-100
+They must also be the same length
+The file must be of type txt and only contain #/' '/E/S
 The file must be opened for this to be tested
 Returns a bool if valid and outputs the length of the file 
 @param:

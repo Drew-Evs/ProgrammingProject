@@ -18,9 +18,11 @@ Files:
 Maps:
 - Must have a start and finish
 - Must be a rectangle
+- Must only have valid characters
 Movement:
 - Must not be into a wall
 - Must be valid if moving into a space
 - Must move in the correct direction
 - Must check to see if exit found 
+- Must only use valid inputs 
 

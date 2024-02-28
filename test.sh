@@ -103,6 +103,16 @@ else
     echo "FAIL"
 fi
 
+# testing to see if the file only contains #/' '/E/S
+echo -n "Valid map characters test - "
+./maze testMaps/invalidChar.txt > tmp
+if grep -q "Maze must only contain valid characters" tmp;
+then 
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
 # testing movement - W/A/S/D should move the character the correct way
 # each test should take one move in the right direction to exit the maze
 echo -e "\n\n~~ Movement Tests ~~"
@@ -180,6 +190,15 @@ fi
 echo -n "Map test - "
 ./maze testFiles/correctFile.txt < inputs/openMap.txt > tmp
 if grep -q testFiles/correctFile.txt tmp;
+then
+    echo "PASS"
+else    
+    echo "FAIL"
+fi
+
+# player should only input w/a/s/d/m/q anything else is invalid
+./maze testFiles/correctFile.txt < inputs/invalidInput.txt > tmp
+if grep -q "Invalid input" tmp;
 then
     echo "PASS"
 else    
