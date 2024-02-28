@@ -197,6 +197,7 @@ else
 fi
 
 # player should only input w/a/s/d/m/q anything else is invalid
+echo -n "Valid input test - "
 ./maze testFiles/correctFile.txt < inputs/invalidInput.txt > tmp
 if grep -q "Invalid input" tmp;
 then
